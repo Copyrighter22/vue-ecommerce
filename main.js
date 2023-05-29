@@ -1,7 +1,8 @@
 const app = Vue.createApp({
     data() {
         return {
-            product: 'Pokeballs'
+            product: 'Pokeballs',
+            image: './assets/images/pokeball.png'
         }
     }
 })
