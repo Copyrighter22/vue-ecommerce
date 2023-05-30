@@ -15,28 +15,32 @@
 
             <div class="product-container">
                 <div class="product-image">
-                  <img v-bind:src="image" :class="{'out-of-stock-img': !inStock}":disabled="!inStock">
+                  <img v-bind:src="image">
                 </div>
+
                 <div class="product-info">
-                  <h1>{{ product }}</h1>
-                  <p v-if="inStock">In Stock</p>
-                  <p v-else >Out of Stock</p>
+                  <h1>{{ title }}</h1>
+                  <h2>{{ sale }}</h2>
                   <ul>
                     <li v-for="detail in details">{{ detail }}</li>
                   </ul>
 
-                  <div v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" class="color-circle" :style="{ background: variant.color}">{{  }}</div>
-                  <button class="button" :class="{disabledButton: !inStock}":disabled="!inStock" @click="addToCart">Add to Cart</button>
+                  <div v-for="(variant, index) in variants" 
+                  :key="variant.id" @mouseover="updateVariant(index)" 
+                  class="color-circle" :style="{ background: variant.color}"></div>
+
+                  <button class="button" :class="{disabledButton: !inStock}":disabled="!inStock" 
+                  @click="addToCart">Add to Cart</button>
+
                 </div>
               </div>
             </div>
-        
-            <script src="./main.js"></script>
-
-            <script>
-                const mountedApp = app.mount('#app')
-            </script>
         </div>
+        <script src="./main.js"></script>
+
+        <script>
+            const mountedApp = app.mount('#app')
+        </script>
 
     </body>
 </html>
