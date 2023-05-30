@@ -1,0 +1,22 @@
+ <!-- Repte personal -->
+ detalls: ['Nom', 'Ratio', 'Compra', 'Venta'],
+ stats: [
+     { id: 1, name: 'Pokeball', ratio: '1x', buy: '200', sell: '100' },
+     { id: 2, name: 'Greatball', ratio: '1.5x', buy: '600', sell: '300' },
+     { id: 3, name: 'Ultraball', ratio: '2x', buy: '1200', sell: '600' },
+     { id: 4, name: 'Masterball', ratio: '255x', buy: '100000', sell: '50000' }
+ ],
+
+
+                        <table>
+                            <tr>
+                                <th v-for="detall in detalls">{{ detall }}</th>  
+                            </tr>
+                            <tr v-for="stat in stats" :key="stat.id">
+                                <td>{{ stat.name }}</td>
+                                <td>{{ stat.ratio }}</td>
+                                <td>{{ stat.buy }}</td>
+                                <td>{{ stat.sell }}</td>
+                            </tr>
+                        </table>
+
