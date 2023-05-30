@@ -18,12 +18,31 @@
                     </div>
                     <div class="product-info">
                         <h1>{{ product }}</h1>
-                        <p v-if="inventory > 10">En Stock</p>
-                        <p v-else-if="inventory <= 10 && inventory > 0">Ultimes unitats!</p>
-                        <p v-else>Fora de Stock</p>
+                        <!-- Repte del video -->
+                        <ul>
+                            <li v-for="detail in details">{{ detail }}</li>
+                        </ul>
+                        <ul>
+                            <li v-for="(size, index) in sizes" :key="index">{{ size }}</li>
+                        </ul>
+                          <div v-for="variant in variants" :key="variant.id">{{ variant.color }}</div>
 
-                        <p v-if="onSale">En venta!</p>
+                        <!-- Repte personal -->
 
+                        <table>
+                            <tr>
+                                <th v-for="detall in detalls">{{ detall }}</th>
+                                
+                            </tr>
+                            <tr v-for="stat in stats" :key="stat.id">
+                                <td>{{ stat.name }}</td>
+                                <td>{{ stat.ratio }}</td>
+                                <td>{{ stat.buy }}</td>
+                                <td>{{ stat.sell }}</td>
+
+                            </tr>
+                        </table>
+                       
                     </div>
                 </div>
             </div>
