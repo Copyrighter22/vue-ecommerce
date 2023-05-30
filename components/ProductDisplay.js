@@ -15,15 +15,15 @@ app.component('product-display', {
 
                     <div class="product-info">
                         <h1>{{ title }}</h1>
-                        <p>{{ sale }}</p>
+                        <p>{{ details }}</p>
                         <p> Gastos de envío: {{ shipping }} </p>
-                        <ul>
-                            <li v-for="detail in details">{{ detail }}</li>
-                        </ul>
+                        
+                        
 
                         <div v-for="(variant, index) in variants" 
                         :key="variant.id" @mouseover="updateVariant(index)" 
-                        class="color-circle" :style="{ background: variant.color}"></div>
+                        class="color-circle" :style="{ background: variant.color}">
+                        </div>
 
                         <button class="button" :class="{disabledButton: !inStock}":disabled="!inStock" 
                         @click="addToCart">Add to Cart</button>
@@ -35,13 +35,15 @@ app.component('product-display', {
         </div>`,
         data() {
             return {
-                product: 'Pokeballs',
-                description: 'Gotta catch em all!',
-                details: ['50% cotton', '30% wool', '20% polyester'],
+                product: 'balls',
                 selectedVariant: 0,
                 variants: [
-                  { id: 2234, color: 'red' , image: './assets/images/pokeball.png', quantity: 50},
-                  { id: 2235, color: 'purple' , image: './assets/images/masterball.webp', quantity: 0},
+                  { id: 1, name:"Poke", color: 'red' , image: './assets/images/pokeball.png', buy: 200,quantity: 50 ,description: 'Es una Ball comú sense ninguna qualitat especial.'},
+                  { id: 2, name:"Super", color: 'blue' , image: './assets/images/superball.png', buy: 600 ,quantity: 25 ,description: 'La Superball és més efectiva que la Pokeball.'},
+                  { id: 3, name:"Turno",color: 'withe' , image: './assets/images/turnoball.png', buy: 1000 ,quantity: 20 ,description: 'La Turnoball és més efectiva contra més temps dura el enfrentament.'},
+                  { id: 4, name:"Lujo",color: 'black' , image: './assets/images/lujoball.png', buy: 1000 ,quantity: 10, description: 'La Lujoball és més efectiva per a la comoditat del nostre company, millorant així més ràpidament el vostre vincle.'},
+                  { id: 5, name:"Veloz",color: 'yellow' , image: './assets/images/velozball.png', buy: 1000 ,quantity: 5, description: 'La Velozball és més efectiva contra Pokémon que poden escapar-se ràpidament.'},
+                  { id: 6, name:"Master",color: 'purple' , image: './assets/images/masterball.png',buy: 9999, quantity: 0, description: 'La Masterball és la més efectiva de totes, ja que sempre captura el Pokémon.'}
                 ],
                 reviews: [],
                 
@@ -63,7 +65,7 @@ app.component('product-display', {
         },
         computed: {
             title() {
-                return this.product + ' ' + this.description
+                return this.variants[this.selectedVariant].name + this.product
             },
             image() {
                 return this.variants[this.selectedVariant].image
@@ -71,9 +73,9 @@ app.component('product-display', {
             inStock() {
                 return this.variants[this.selectedVariant].quantity
             },
-            sale() {
+            details() {
                 if (this.inStock > 0) {
-                    return this.product + ' ' + this.description + ' en venta!'
+                    return this.variants[this.selectedVariant].buy + '€' + ' | ' + this.variants[this.selectedVariant].description
                 }
                 return ''
             },
@@ -81,7 +83,7 @@ app.component('product-display', {
                 if (this.premium) {
                     return 'Gratis'
                 }
-                return 2.99
+                return 2.99 + '€'
             }
         
         }
