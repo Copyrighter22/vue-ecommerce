@@ -8,12 +8,12 @@ app.component('product-display', {
     template:
     /*html*/
     `<div class="product-display">
-                    <div class="product-container">
-                        <div class="product-image">
+            <div class="product-container">
+                    <div class="product-image">
                         <img v-bind:src="image">
-                        </div>
+                    </div>
 
-                        <div class="product-info">
+                    <div class="product-info">
                         <h1>{{ title }}</h1>
                         <p>{{ sale }}</p>
                         <p> Gastos de envío: {{ shipping }} </p>
@@ -28,8 +28,10 @@ app.component('product-display', {
                         <button class="button" :class="{disabledButton: !inStock}":disabled="!inStock" 
                         @click="addToCart">Add to Cart</button>
 
-                        </div>
+                    </div>
             </div>
+            <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+            <review-form @review-submitted="addReview"></review-form>
         </div>`,
         data() {
             return {
@@ -41,6 +43,8 @@ app.component('product-display', {
                   { id: 2234, color: 'red' , image: './assets/images/pokeball.png', quantity: 50},
                   { id: 2235, color: 'purple' , image: './assets/images/masterball.webp', quantity: 0},
                 ],
+                reviews: [],
+                
     
             }
         },
@@ -51,6 +55,10 @@ app.component('product-display', {
     
             updateVariant(index) {
                 this.selectedVariant = index
+            },
+
+            addReview(review) {
+                this.reviews.push(review)
             }
         },
         computed: {
